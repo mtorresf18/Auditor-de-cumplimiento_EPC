@@ -1,0 +1,72 @@
+Auditor-de-cumplimiento_EPC/
+├── config/
+│   ├── base_datos.js
+│   └── parametros_scraping.js
+├── controladores/
+│   ├── auditoriaControlador.js
+│   ├── usuarioControlador.js
+│   └── plantillasControlador.js
+├── modelos/
+│   ├── InformeAuditoria.js
+│   ├── Usuario.js
+│   └── PlantillaLegal.js
+├── rutas/
+│   ├── rutasAuditoria.js
+│   ├── rutasUsuario.js
+│   └── rutasPlantillas.js
+├── servicios/
+│   ├── motorScraping.js
+│   ├── analizadorNLP.js
+│   └── generadorSemaforo.js
+├── vistas/
+│   ├── inicio.html
+│   ├── panel_control.html
+│   └── reporte_semaforo.html
+├── publico/
+│   ├── css/
+│   │   └── estilos.css
+│   └── js/
+│       └── interacciones.js
+├── app.js
+└── package.json
+
+
+
+Raíz del proyecto
+    app.js: Es el archivo principal que levanta el servidor web. Recibe las peticiones iniciales y conecta las rutas con los controladores.
+    package.json: Contiene las dependencias del proyecto. Guarda las librerías necesarias para el rastreo web y el análisis de datos.
+
+Directorio config/ (Configuraciones)
+    base_datos.js: Establece la conexión directa con el motor de base de datos.
+    parametros_scraping.js: Almacena los límites de tiempo, los agentes de usuario y las reglas para evitar bloqueos durante la extracción de datos en las tiendas virtuales.
+
+Directorio modelos/ (Modelos)
+Representan la estructura de los datos en la base de datos.
+    Usuario.js: Define los datos del comerciante registrado. Maneja la información de autenticación y los datos básicos de la empresa.
+    InformeAuditoria.js: Guarda los resultados de cada escaneo. Registra la URL analizada, la fecha y los puntajes obtenidos.
+    PlantillaLegal.js: Almacena los textos base de las políticas de devoluciones y protección de datos que se entregan al cliente.
+
+Directorio vistas/ (Vistas)
+Contienen la interfaz gráfica con la que interactúa el usuario final.
+    inicio.html: Es la página de aterrizaje (landing page). Incluye la barra de búsqueda para la prueba rápida gratuita.
+    panel_control.html: Es el espacio de trabajo del usuario registrado. Muestra el historial de auditorías.
+    reporte_semaforo.html: Presenta los resultados del escaneo. Muestra los colores rojo, amarillo y verde según el nivel de riesgo detectado.
+
+Directorio controladores/ (Controladores)
+Intermedian entre las vistas y los modelos.
+    auditoriaControlador.js: Recibe la URL que el usuario ingresa en la vista. Llama a los servicios de escaneo y guarda el resultado usando el modelo correspondiente.
+    usuarioControlador.js: Procesa el registro y el inicio de sesión.
+    plantillasControlador.js: Gestiona la descarga y personalización de los documentos legales sugeridos.
+
+Directorio rutas/ (Enrutadores)
+    rutasAuditoria.js, rutasUsuario.js, rutasPlantillas.js: Definen las direcciones URL (endpoints) que el navegador puede consultar. Conectan cada petición web con la función correcta dentro de los controladores.
+
+Directorio servicios/ (Lógica técnica especializada)
+Agrupa las funciones complejas que no pertenecen directamente a un controlador básico.
+    motorScraping.js: Es el script que visita la tienda virtual. Navega por el código fuente para extraer los textos legales y los botones de compra.
+    analizadorNLP.js: Compara el texto extraído por el motor de rastreo contra los requisitos de la Ley 1480 y la Ley 1581. Detecta omisiones o cláusulas no permitidas.
+    generadorSemaforo.js: Pondera los fallos encontrados. Asigna el color de riesgo y arma la estructura del informe final.
+
+Directorio publico/ (Archivos estáticos)
+    css/estilos.css: Determina el diseño visual de las vistas.
+    js/interacciones.js: Ejecuta acciones en el navegador del usuario, como animaciones de carga o validación de formularios en tiempo real.
